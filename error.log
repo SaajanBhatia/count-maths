@@ -1,0 +1,7 @@
+17-Dec-21 19:32:37 - SERVER STARTED
+17-Dec-21 19:32:37 -  * Debugger is active!
+117-Dec-21 20:20:55 -  * Restarting with stat
+17-Dec-21 20:25:42 -  * Restarting with stat
+17-Dec-21 20:39:59 -  * Restarting with stat
+-21 19:32:46 - 127.0.0.1 - - [17/Dec/2021 19:32:46] "[37mGET / HTTP/1.1[0m" 200 -
+17-Dec-21 20:20:55 -  * Detected change in 'C:\\Users\\saaja\\Documents\\Lboro\\Count Tutoring\\flask\\app.py', reloading
