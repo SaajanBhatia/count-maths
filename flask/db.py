@@ -24,6 +24,14 @@ class database:
         ).fetchone()
         return passwordHash[0]
 
+    def getUserDetails(self, username):
+        userDetails = self.__db.execute(
+            "SELECT accountType, email, firstName, lastName, status, homeAddress, dateOfBirth from member_details where member_details.username = :username", {
+                "username" : username
+            }
+        ).fetchall()
+        return userDetails
+
     def getUserID(username):
         pass
 
@@ -37,12 +45,6 @@ class database:
         pass
 
     def setMemberInactive():
-        pass
-
-    def setAccountActive(memberId):
-        pass
-
-    def setAccountInactive(memberId):
         pass
 
     

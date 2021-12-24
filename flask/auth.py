@@ -24,13 +24,8 @@ class auth:
         )
 
     def getSessionDetails(self):
-        return {
-            "accountType" : "ADMIN",
-            "email" : "Saajan@SSBhatia.co.uk",
-            "firstName" : "Saajan",
-            "lastName" : "Bhatia",
-            "status" : "ACTIVE"
-        }
+        userDetails = self.__database.getUserDetails(self.__username)
+        return userDetails
 
     def returnMessage(self, type, message):
         return {
@@ -51,12 +46,41 @@ class auth:
             return True
         else:
             return False
+
+    def validPasswordStrength(self, password):
+        if len(password) < 6:
+            return [False, "Password is too short."]
+
+        if len(password) > 50:
+            return [False, "Password is too long."]
+
+        if not any(char.isdigit() for char in password):
+            return [False, "Password must contain a number."]
+
+        if not any(char.isupper() for char in password):
+            return [False, "Password should have at least one uppercase letter."]
+          
+        if not any(char.islower() for char in password):
+            return [False, "Password should have at least one lowercase letter."]
+       
+        return [True]
         
 
-    def createAccount(firstName, lastName, DOB, Address):
-        ## Validate Username and Password
+    def createAccount(self, homeAddr, email, dob, firstName, lastName):
+        ## Validate Username 
+        usernames = self.__database.getAllUsernames()
+        if (self.__username,) in usernames:
+            return self.returnMessage("ERROR", "Username already exists.")
+
+        ## Validate Password
+        validPswrd = self.validPasswordStrength(self.__password)
+        if not validPswrd[0]:
+            return self.returnMessage("ERROR", validPswrd[1])
+
         ## Write to DB details
-        pass
+
+        ## Return success
+        return self.returnMessage("SUCCESS", "Account Created")
 
     def signIn(self):
         if self.__validateUsername(self.__username):
