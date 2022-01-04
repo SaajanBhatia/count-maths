@@ -47,6 +47,13 @@ def about():
         <h1>About Page</h1>
     '''
 
+# Awaiting Account Moderation (Static)
+@app.route("/awaitingModeration")
+def awaitingModeration():
+    return '''
+        <h1>Awaiting Moderation</h1>
+    '''
+
 # Sign In Route
 @app.route("/signIn")
 def signIn():
@@ -69,18 +76,31 @@ def signOut():
 # Create Account Route
 @app.route("/createAccount")
 def createAccount():
-    ## Ex data
+    ## Eg data
     username = "johny"
-    password = "Psdf"
+    password = "Psddsfsfsdf23f"
     fName = "John"
     lName = "Doe"
     homeAddr = "E11 1JX"
     email = "john@gmail.com"
-    dateOfBirth = "14/03/2000"
+    dateOfBirth = "2003/04/25"
 
-    tempUser = auth(username, password, databaseConfig,)
-    token = tempUser.createAccount(homeAddr=homeAddr, email=email, dob=dateOfBirth, firstName=fName, lastName=lName)
+    tempUser = auth(username, password, databaseConfig)
+    token = tempUser.createAccount(
+        homeAddr=homeAddr, email=email, dob=dateOfBirth, firstName=fName, lastName=lName
+    )
     return ("CREATE ACCOUNT: \n" + str(token))
+    ## return user to static page saying account is awaiting moderation, please come back later
+
+## ADMIN TASKS ONLY 
+@app.route("/moderateAccount/<memberID>")
+def moderateAccount(memberID):
+    if not session or session["accountType"] != "ADMIN":
+        return "404, get off bumber"
+    else:
+        # get accounts to moderate
+        # return json of account details
+        pass
 
 if __name__ == "__main__":
     logging.warning("SERVER STARTED")

@@ -31,7 +31,7 @@ databaseConfig = {
 '''
     Account Types : [Student, Tutor, Admin]
 '''
-
+## Tables
 membersTable = (
     "CREATE TABLE member_details ( \
     memberID INT AUTO_INCREMENT PRIMARY KEY, \
@@ -43,6 +43,7 @@ membersTable = (
     dateOfBirth DATE, \
     status CHAR(100), \
     email CHAR(200), \
+    dateCreated DATE,\
     accountType CHAR(100) NOT NULL);"
 )
 

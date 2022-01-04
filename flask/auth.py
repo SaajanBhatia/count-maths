@@ -78,6 +78,18 @@ class auth:
             return self.returnMessage("ERROR", validPswrd[1])
 
         ## Write to DB details
+        # Put info into PY DICT
+        userInfo = {
+            "homeAddr" : homeAddr,
+            "email" : email,
+            "dob" : dob,
+            "firstName" : firstName,
+            "lastName" : lastName,
+            "username" : self.__username,
+            "password" : sha256_crypt.encrypt(self.__password)
+        }
+
+        self.__database.addNewMember(userInfo)
 
         ## Return success
         return self.returnMessage("SUCCESS", "Account Created")

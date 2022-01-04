@@ -1,5 +1,8 @@
 ## DB PY Functions for Reading and Writing to Database
 
+## Import Datetime Module
+import datetime
+
 class database:
     ## Database details
     def __init__(self, host, username, password, database, port, db):
@@ -35,8 +38,26 @@ class database:
     def getUserID(username):
         pass
 
-    def addNewMember():
-        pass
+    def addNewMember(self, userInfo):
+        self.__db.execute(
+            "INSERT INTO member_details(username,password,firstName,lastName,homeAddress,dateOfBirth,status,email,dateCreated,accountType) VALUES \
+                (:username,:password,:firstName,:lastName,:homeAddress,:dateOfBirth,:status,:email,:dateCreated,:accountType)",
+                {
+                    "username" : userInfo["username"],
+                    "password" : userInfo["password"],
+                    "firstName" : userInfo["firstName"],
+                    "lastName" : userInfo["lastName"],
+                    "homeAddress" : userInfo["homeAddr"],
+                    "dateOfBirth" : userInfo["dob"],
+                    "status" : "MODERATE",
+                    "email" : userInfo["email"],
+                    "dateCreated" : (datetime.datetime.now().strftime("%Y/%m/%d")),
+                    "accountType" : "STUDENT"
+                }
+        )
+        
+        self.__db.commit()
+
     
     def updateMember():
         pass
